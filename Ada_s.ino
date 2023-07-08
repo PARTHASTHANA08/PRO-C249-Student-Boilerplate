@@ -5,15 +5,15 @@
 
 /************************* WiFi Access Point *********************************/
 
-#define WLAN_SSID       "WR3005N3-757E"
-#define WLAN_PASS       "70029949"
+#define WLAN_SSID       "GNXS-2.4G-8BC398"
+#define WLAN_PASS       ""
 
 /************************* Adafruit.io Setup *********************************/
 
 #define AIO_SERVER      "io.adafruit.com"
 #define AIO_SERVERPORT  1883                   // use 8883 for SSL
-#define AIO_USERNAME  "Tamtap"
-#define AIO_KEY       "aio_ozIw67GZ2KKiwjN7Uvz5HDQeiuY0"
+#define AIO_USERNAME  "Parthasthana08"
+#define AIO_KEY       "aio_ORvQ14y9RpU9OaNlg7GbHhPCO07J"
 
 
 
@@ -111,8 +111,27 @@ void loop() {
 
 
   Adafruit_MQTT_Subscribe *subscription;
-  
-
+  while((subscription = mqtt.readSubscription(5000))){}
+  if(subscription == &sw1){
+    stringOne = (char * )sw1.lastRead;
+    if(stringOne == "ON"){
+      digitalWrite(led1,HIGH);
+      
+    }
+    if(stringOne == "OFF"){
+      digitalWrite(led1,LOW);
+    }
+  }
+   if(subscription == &sw2){
+    stringTwo = (char * )sw2.lastRead;
+    if(stringTwo == "ON"){
+      digitalWrite(led2,HIGH);
+      
+    }
+    if(stringTwo == "OFF"){
+      digitalWrite(led2,LOW);
+    }
+  }
 
   if(! temperature.publish(q)){
    
@@ -128,7 +147,10 @@ void loop() {
 
 void MQTT_connect() 
 {
-  
+int8_t ret;
+  if(mqtt.connected()){
+    return;
+  }
   }
 
   //Serial.print("Connecting to MQTT... ");
