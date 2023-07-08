@@ -6,7 +6,7 @@
 /************************* WiFi Access Point *********************************/
 
 #define WLAN_SSID       "GNXS-2.4G-8BC398"
-#define WLAN_PASS       ""
+#define WLAN_PASS       "BC62D28BC398"
 
 /************************* Adafruit.io Setup *********************************/
 
